@@ -9,12 +9,12 @@
             </li>
             <li class="nav-item">
                 <x-nav-link :href="route('prisoners.index')" :active="request()->routeIs('prisoners')">
-                    {{ __('Prisoners') }}
+                    {{ __('Gevangenen') }}
                 </x-nav-link>
             </li>
             <li class="nav-item">
                 <x-nav-link :href="route('cells.index')" :active="request()->routeIs('cells')">
-                    {{ __('Cells') }}
+                    {{ __('Cellen') }}
                 </x-nav-link>
             </li>
         </ul>
@@ -27,7 +27,7 @@
 
                 <x-slot name="content">
                     <li><x-dropdown-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
+                        {{ __('Profiel') }}
                     </x-dropdown-link></li>
 
                     <!-- Authentication -->
@@ -37,7 +37,7 @@
                         <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                             this.closest('form').submit();">
-                            {{ __('Log Out') }}
+                            {{ __('Uitloggen') }}
                         </x-dropdown-link>
                     </form></li>
                 </x-slot>

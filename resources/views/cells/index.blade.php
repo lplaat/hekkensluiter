@@ -2,7 +2,7 @@
     <div class="card m-2">
         <div class="card-body">
             <div class="d-flex">
-                <h2>Cells</h2>
+                <h2>Cellen</h2>
             </div>
 
             <table id="cells" class="table table-striped">

@@ -1,11 +1,11 @@
 <section>
     <header>
         <h3>
-            {{ __('Profile Information') }}
+            {{ __('Profielinformatie') }}
         </h3>
 
         <p class="mt-1">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Werk de profielinformatie en het e-mailadres van je account bij.") }}
         </p>
     </header>
 
@@ -18,29 +18,29 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Naam')" />
             <x-text-input id="name" name="name" type="text" class="mt-1" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div class="mt-3">
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="__('E-mail')" />
             <x-text-input id="email" name="email" type="email" class="mt-1" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="mt-2">
-                        {{ __('Your email address is unverified.') }}
+                        {{ __('Je e-mailadres is niet geverifieerd.') }}
 
                         <button form="send-verification" class="rounded-md">
-                            {{ __('Click here to re-send the verification email.') }}
+                            {{ __('Klik hier om de verificatie-e-mail opnieuw te verzenden.') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
                         <p class="mt-2">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                            {{ __('Er is een nieuwe verificatielink naar je e-mailadres verzonden.') }}
                         </p>
                     @endif
                 </div>
@@ -48,7 +48,7 @@
         </div>
 
         <div class="mt-3">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Opslaan') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
@@ -56,7 +56,7 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                >{{ __('Saved.') }}</p>
+                >{{ __('Opgeslagen.') }}</p>
             @endif
         </div>
     </form>

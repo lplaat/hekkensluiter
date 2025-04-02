@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Cell Finder</h5>
+                    <h5 class="modal-title" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Cel Zoeker</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
@@ -17,9 +17,9 @@
 
                 <div class="modal-footer">
                     <?php if($prisoner->cell_id !== null) { ?>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="assignCell(null)">Unassign</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" onclick="assignCell(null)">Loskoppelen</button>
                     <?php } ?>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sluiten</button>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
     <div class="card m-2">
         <div class="card-body">
             <div class="d-flex">
-                <h2>Prisoner - <?= $prisoner->firstname ?> <?= $prisoner->lastname ?></h2>
+                <h2>Gevangene - <?= $prisoner->firstname ?> <?= $prisoner->lastname ?></h2>
             </div>
 
             <form action="/prisoners/<?= $prisoner->id ?>" method="POST" id="prisoners-from" class="ajax-request reload-on-success">
@@ -40,7 +40,7 @@
 
                 <div class="row mt-3">
                     <div class="col-2 align-content-center">
-                        <label>Firstname</label>
+                        <label>Voornaam</label>
                     </div>
                     <div class="col-10">
                         <input type="text" name="firstname" value="<?= $prisoner->firstname ?>" class="form-control">
@@ -49,7 +49,7 @@
 
                 <div class="row mt-3">
                     <div class="col-2 align-content-center">
-                        <label>Lastname</label>
+                        <label>Achternaam</label>
                     </div>
                     <div class="col-10">
                         <input type="text" name="lastname" value="<?= $prisoner->lastname ?>" class="form-control">
@@ -58,7 +58,7 @@
 
                 <div class="row mt-3">
                     <div class="col-2 align-content-center">
-                        <label>Birthdate</label>
+                        <label>Geboortedatum</label>
                     </div>
                     <div class="col-10">
                         <input type="date" name="birthdate" value="<?= $prisoner->birthdate ?>" class="form-control">
@@ -67,7 +67,7 @@
 
                 <div class="row mt-3">
                     <div class="col-2 align-content-center">
-                        <label>Date of arrival</label>
+                        <label>Datum van aankomst</label>
                     </div>
                     <div class="col-10">
                         <input type="date" name="date_of_arrival" value="<?= $prisoner->date_of_arrival ?>" class="form-control">
@@ -76,7 +76,7 @@
 
                 <div class="row mt-3">
                     <div class="col-2 align-content-center">
-                        <label>Date of leaving</label>
+                        <label>Datum van vertrek</label>
                     </div>
                     <div class="col-10">
                         <input type="date" name="date_of_leaving" value="<?= $prisoner->date_of_leaving ?>" class="form-control">
@@ -84,18 +84,18 @@
                 </div>
 
                 <div class="row mt-3">
-                    <div class="col-2 align-content-center">Cell</div>
+                    <div class="col-2 align-content-center">Cel</div>
                     <div class="col-10">
                         <?php if($prisoner->cell_id !== null) { ?>
-                            <a href="/cells/<?= $prisoner->cell_id ?>"><?= $prisoner->Cell->code ?></a> - <a href="#" data-bs-toggle="modal" data-bs-target="#cell-finder" onclick="cellSearch()">Change Cell</a>
+                            <a href="/cells/<?= $prisoner->cell_id ?>"><?= $prisoner->Cell->code ?></a> - <a href="#" data-bs-toggle="modal" data-bs-target="#cell-finder" onclick="cellSearch()">Cel wijzigen</a>
                         <?php } else { ?>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#cell-finder" onclick="cellSearch()">Search Cell</a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#cell-finder" onclick="cellSearch()">Cel zoeken</a>
                         <?php } ?>
                     </div>
                 </div>
 
                 <div class="d-flex mt-1">
-                    <button type="submit" class="ms-auto btn btn-primary">Save</button>
+                    <button type="submit" class="ms-auto btn btn-primary">Opslaan</button>
                 </div>
             </form>
         </div>

@@ -2,7 +2,7 @@
     <div class="card m-2">
         <div class="card-body">
             <div class="d-flex">
-                <h2>Cell - <?= $cell->code ?></h2>
+                <h2>Cel - <?= $cell->code ?></h2>
             </div>
 
             <form action="/cells/<?= $cell->id ?>" method="POST" class="ajax-request">
@@ -20,7 +20,7 @@
 
                 <div class="row mt-3">
                     <div class="col-2 align-content-center">
-                        <label>Wing Code</label>
+                        <label>Vleugel Code</label>
                     </div>
                     <div class="col-10">
                         <input type="text" name="wing_code" value="<?= $cell->wing_code ?>" class="form-control">
@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="d-flex mt-1">
-                    <button type="submit" class="ms-auto btn btn-primary">Save</button>
+                    <button type="submit" class="ms-auto btn btn-primary">Opslaan</button>
                 </div>
             </form>
         </div>

@@ -21,10 +21,10 @@ class PrisonerController extends Controller
                 return $prisoner->date_of_arrival;
             })
             ->addColumn('cel', function ($prisoner) {
-                return $prisoner->cell_id ? "Cell #{$prisoner->cell_id}" : 'No Cell Assigned';
+                return $prisoner->cell_id ? "{$prisoner->Cell->code}" : 'Geen cel toegewezen';
             })
             ->addColumn('action', function ($prisoner) {
-                return '<a href="'.route('prisoners.show', $prisoner->id).'" class="btn btn-info btn-sm">View</a>';
+                return '<a href="'.route('prisoners.show', $prisoner->id).'" class="btn btn-info btn-sm">Bekijken</a>';
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -72,6 +72,6 @@ class PrisonerController extends Controller
     {
         $prisoner = Prisoner::findOrFail($id);
         $prisoner->delete();
-        return response()->json(['message' => 'Prisoner deleted successfully']);
+        return response()->json(['message' => 'Gevangene succesvol verwijderd']);
     }
 }

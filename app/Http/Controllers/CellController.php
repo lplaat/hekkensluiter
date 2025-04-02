@@ -36,14 +36,14 @@ class CellController extends Controller
                 // Check if a prisoner is assigned to this cell via the prisoners table
                 $prisoner = Prisoner::where('cell_id', $cell->id)->first();
                 return $prisoner === null
-                    ? 'Empty'
-                    : 'Occupied By ' . $prisoner->firstname . ' ' . $prisoner->lastname;
+                    ? 'Leeg'
+                    : 'Bezet door ' . $prisoner->firstname . ' ' . $prisoner->lastname;
             })
             ->addColumn('action', function ($cell) use ($actionType) {
                 if ($actionType === 'viewCell') {
-                    return '<a href="' . route('cells.show', $cell->id) . '" class="btn btn-info btn-sm">View</a>';
+                    return '<a href="' . route('cells.show', $cell->id) . '" class="btn btn-info btn-sm">Bekijken</a>';
                 } elseif ($actionType === 'prisonerAssign') {
-                    return '<a onclick="assignCell(' . $cell->id . ')" class="btn btn-success btn-sm">Assign</a>';
+                    return '<a onclick="assignCell(' . $cell->id . ')" class="btn btn-success btn-sm">Toewijzen</a>';
                 }
             })
             ->rawColumns(['action'])

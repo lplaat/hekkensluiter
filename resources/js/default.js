@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
             success: async function (data) {
                 new Notify({
                     status: 'success',
-                    text: "Data saved!",
+                    text: "Gegevens opgeslagen!",
                 });
 
                 if(form.hasClass('reload-on-success')) {

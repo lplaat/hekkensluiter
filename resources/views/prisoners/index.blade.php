@@ -2,7 +2,7 @@
     <div class="card m-2">
         <div class="card-body">
             <div class="d-flex">
-                <h2>Prisoners</h2>
+                <h2>Gevangenen</h2>
             </div>
 
             <table id="prisoners" class="table table-striped">
