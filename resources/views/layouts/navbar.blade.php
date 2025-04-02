@@ -7,6 +7,11 @@
                     {{ __('Dashboard') }}
                 </x-nav-link>
             </li>
+            <li class="nav-item">
+                <x-nav-link :href="route('prisoners.index')" :active="request()->routeIs('prisoners')">
+                    {{ __('Prisoners') }}
+                </x-nav-link>
+            </li>
         </ul>
         <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
