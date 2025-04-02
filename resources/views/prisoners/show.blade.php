@@ -7,6 +7,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
+                <div class="p-2">
+                    <textarea id="transferNote" class="form-control" placeholder="Notitie voor celwijziging"></textarea>
+                </div>
+
                 <div class="modal-body">
                     <table id="searchResults" class="table table-striped">
                         <thead>
@@ -37,6 +41,7 @@
                 @csrf
 
                 <input type="hidden" name="cell_id" value="<?= $prisoner->cell_id ?>" />
+                <input type="hidden" name="note" value="" />
 
                 <div class="row mt-3">
                     <div class="col-2 align-content-center">
@@ -101,6 +106,18 @@
         </div>
     </div>
 
+    <div class="card m-2">
+        <div class="card-body">
+            <h2>Cel Geschiedenis</h2>
+
+            <table id="cellHistroy" class="table table-striped">
+                <thead>
+
+                </thead>
+            </table>
+        </div>
+    </div>
+
     <script>
         let table = null;
         function cellSearch() {
@@ -112,6 +129,16 @@
         }
 
         function assignCell(celId) {
+            if($('#transferNote').val() === '') {
+                new Notify({
+                    status: 'error',
+                    text: "Leeg notitie veld is niet toegestaan!",
+                });
+                return;
+            }
+
+            $('input[name=note]').val($('#transferNote').val());
+
             if(celId == null) {
                 $('input[name=cell_id]').val('');
             } else {
@@ -121,5 +148,9 @@
             $('#cell-finder').modal('hide');
             $('#prisoners-from').submit();
         }
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+            createDataTable('cellHistroy', ['actie', 'gebruiker', 'hoelaat', 'notitie'], '/cellHistories?prisonerId=<?= $prisoner->id ?>');
+        });
     </script>
 </x-app-layout>

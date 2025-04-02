@@ -16,6 +16,6 @@ class Cell extends Model
 
     public function currentPrisoner()
     {
-        return $this->belongsTo(Prisoner::class, 'id');
+        return $this->belongsTo(Prisoner::class, 'id', 'cell_id');
     }
 }

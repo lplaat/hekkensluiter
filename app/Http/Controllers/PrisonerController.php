@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Prisoner;
+use App\Models\CellHistory;
+use App\Models\Cell;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -64,6 +68,31 @@ class PrisonerController extends Controller
     public function update(Request $request, $id)
     {
         $prisoner = Prisoner::findOrFail($id);
+
+        if(!empty($request['cell_id'])) {
+            $newCell = Cell::findOrFail($request['cell_id']);
+        }
+
+        if($prisoner->cell_id !== null && empty($request['cell_id'])) {
+            $log = new CellHistory();
+            $log->type = 'unassigned';
+        } else if($prisoner->cell_id == null && !empty($request['cell_id'])) {
+            $log = new CellHistory();
+            $log->type = 'assigned';
+        } else if($prisoner->cell_id !== null && !empty($request['cell_id']) && intval($request['cell_id']) !== $prisoner->cell_id) {
+            $log = new CellHistory();
+            $log->type = 'transferred';
+            $log->old_cell_id = $prisoner->cell_id;
+        }
+
+        if(isset($log)) {
+            $log->prisoner_id = $prisoner->id;
+            $log->user_id = Auth::id();
+            $log->cell_id = $request['cell_id'] !== null ? $request['cell_id'] : $prisoner->cell_id;
+            $log->note = $request['note'];
+            $log->save();
+        }
+
         $prisoner->update($request->all());
         return response()->json($prisoner);
     }

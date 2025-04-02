@@ -28,7 +28,6 @@ class CellController extends Controller
             $query->whereNotIn('id', $occupiedCellIds);
         }
 
-    
         $cells = $query->get();
     
         return DataTables::of($cells)
