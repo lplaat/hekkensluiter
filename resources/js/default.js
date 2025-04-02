@@ -57,6 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     status: 'success',
                     text: "Data saved!",
                 });
+
+                if(form.hasClass('reload-on-success')) {
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                }
             }
         });
     });

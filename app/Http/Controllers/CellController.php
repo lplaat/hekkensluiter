@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
 use App\Models\Cell;
+use App\Models\Prisoner;
 
 class CellController extends Controller
 {
@@ -14,14 +15,36 @@ class CellController extends Controller
         if (!$request->ajax()) {
             return view("cells.index");
         }
+    
+        $actionType = $request->input('action', 'viewCell');
+        $occupation = filter_var($request->input('occupation', true), FILTER_VALIDATE_BOOLEAN);
 
-        $cells = Cell::all();
+        // Start a query for cells
+        $query = Cell::query();
+    
+        // If occupation is false, filter out cells that have a prisoner assigned in the prisoners table
+        if ($occupation === false) {
+            $occupiedCellIds = Prisoner::whereNotNull('cell_id')->pluck('cell_id')->toArray();
+            $query->whereNotIn('id', $occupiedCellIds);
+        }
+
+    
+        $cells = $query->get();
+    
         return DataTables::of($cells)
             ->addColumn('status', function ($cell) {
-                return $cell->currentPrisoner == null ? 'Empty' : 'Occupied By ' . $cell->currentPrisoner->firstname . ' ' . $cell->currentPrisoner->lastname;
+                // Check if a prisoner is assigned to this cell via the prisoners table
+                $prisoner = Prisoner::where('cell_id', $cell->id)->first();
+                return $prisoner === null
+                    ? 'Empty'
+                    : 'Occupied By ' . $prisoner->firstname . ' ' . $prisoner->lastname;
             })
-            ->addColumn('action', function ($cell) {
-                return '<a href="'.route('cells.show', $cell->id).'" class="btn btn-info btn-sm">View</a>';
+            ->addColumn('action', function ($cell) use ($actionType) {
+                if ($actionType === 'viewCell') {
+                    return '<a href="' . route('cells.show', $cell->id) . '" class="btn btn-info btn-sm">View</a>';
+                } elseif ($actionType === 'prisonerAssign') {
+                    return '<a onclick="assignCell(' . $cell->id . ')" class="btn btn-success btn-sm">Assign</a>';
+                }
             })
             ->rawColumns(['action'])
             ->make(true);

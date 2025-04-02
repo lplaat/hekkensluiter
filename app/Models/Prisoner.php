@@ -16,7 +16,7 @@ class Prisoner extends Model
         'profile_picture',
         'date_of_arrival',
         'date_of_leaving',
-        'cel_id',
+        'cell_id',
     ];
 
     public function cell()

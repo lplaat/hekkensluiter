@@ -21,7 +21,7 @@ class PrisonerController extends Controller
                 return $prisoner->date_of_arrival;
             })
             ->addColumn('cel', function ($prisoner) {
-                return $prisoner->cel_id ? "Cell #{$prisoner->cel_id}" : 'No Cell Assigned';
+                return $prisoner->cell_id ? "Cell #{$prisoner->cell_id}" : 'No Cell Assigned';
             })
             ->addColumn('action', function ($prisoner) {
                 return '<a href="'.route('prisoners.show', $prisoner->id).'" class="btn btn-info btn-sm">View</a>';
@@ -33,6 +33,10 @@ class PrisonerController extends Controller
     // Store a new prisoner
     public function store(Request $request)
     {
+        $request->merge([
+            'cell_id' => empty($request->cell_id) ? null : $request->cell_id
+        ]);
+
         $validatedData = $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -40,7 +44,7 @@ class PrisonerController extends Controller
             'profile_picture' => 'nullable|string',
             'date_of_arrival' => 'required|date',
             'date_of_leaving' => 'nullable|date',
-            'cel_id' => 'nullable|integer',
+            'cell_id' => 'nullable|integer',
         ]);
 
         $prisoner = Prisoner::create($validatedData);
