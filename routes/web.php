@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrisonerController;
+use App\Http\Controllers\CellController;
 
 // Default routes
 Route::get('/', function () {
@@ -14,7 +15,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Prisoners routes
-Route::resource('/prisoners', PrisonerController::class);
+Route::resource('/prisoners', controller: PrisonerController::class);
+Route::resource('/cells', controller: CellController::class);
 
 // Profile Routes
 Route::middleware('auth')->group(callback: function () {

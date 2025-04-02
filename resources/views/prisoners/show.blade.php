@@ -54,11 +54,11 @@
                     </div>
                 </div>
 
-                <?php if($prisoner->cel_id !== null) { ?>
+                <?php if($prisoner->cell_id !== null) { ?>
                     <div class="row mt-3">
-                        <div class="col-2 align-content-center">Cel</div>
+                        <div class="col-2 align-content-center">Cell</div>
                         <div class="col-10">
-                            <a href="/cel/<?= $prisoner->cel_id ?>"><?= $prisoner->Cel->code ?></a>
+                            <a href="/cells/<?= $prisoner->cell_id ?>"><?= $prisoner->Cell->code ?></a>
                         </div>
                     </div>
                 <?php } ?>

@@ -18,4 +18,9 @@ class Prisoner extends Model
         'date_of_leaving',
         'cel_id',
     ];
+
+    public function cell()
+    {
+        return $this->belongsTo(Cell::class, 'cell_id');
+    }
 }

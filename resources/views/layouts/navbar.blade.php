@@ -12,6 +12,11 @@
                     {{ __('Prisoners') }}
                 </x-nav-link>
             </li>
+            <li class="nav-item">
+                <x-nav-link :href="route('cells.index')" :active="request()->routeIs('cells')">
+                    {{ __('Cells') }}
+                </x-nav-link>
+            </li>
         </ul>
         <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
