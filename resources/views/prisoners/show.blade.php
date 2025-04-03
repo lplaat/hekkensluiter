@@ -29,80 +29,115 @@
         </div>
     </div>
 
-    <div class="card m-2">
-        <div class="card-body">
-            <div class="d-flex">
-                <h2>Gevangene - <?= $prisoner->firstname ?> <?= $prisoner->lastname ?></h2>
+    <div class="row m-2">
+        <div class="col-8 px-0 pe-1">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h2>Gevangene - <?= $prisoner->firstname ?> <?= $prisoner->lastname ?></h2>
+                    </div>
+        
+                    <form action="/prisoners/<?= $prisoner->id ?>" method="POST" id="prisoners-from" class="ajax-request reload-on-success">
+                        <input type="hidden" name="_method" value="PUT" />
+        
+                        @csrf
+        
+                        <input type="hidden" name="cell_id" value="<?= $prisoner->cell_id ?>" />
+                        <input type="hidden" name="note" value="" />
+        
+                        <div class="row mt-3">
+                            <div class="col-2 align-content-center">
+                                <label>Voornaam</label>
+                            </div>
+                            <div class="col-10">
+                                <input type="text" name="firstname" value="<?= $prisoner->firstname ?>" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="row mt-3">
+                            <div class="col-2 align-content-center">
+                                <label>Achternaam</label>
+                            </div>
+                            <div class="col-10">
+                                <input type="text" name="lastname" value="<?= $prisoner->lastname ?>" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="row mt-3">
+                            <div class="col-2 align-content-center">
+                                <label>Geboortedatum</label>
+                            </div>
+                            <div class="col-10">
+                                <input type="date" name="birthdate" value="<?= $prisoner->birthdate ?>" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="row mt-3">
+                            <div class="col-2 align-content-center">
+                                <label>Datum van aankomst</label>
+                            </div>
+                            <div class="col-10">
+                                <input type="date" name="date_of_arrival" value="<?= $prisoner->date_of_arrival ?>" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="row mt-3">
+                            <div class="col-2 align-content-center">
+                                <label>Datum van vertrek</label>
+                            </div>
+                            <div class="col-10">
+                                <input type="date" name="date_of_leaving" value="<?= $prisoner->date_of_leaving ?>" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="row mt-3">
+                            <div class="col-2 align-content-center">Cel</div>
+                            <div class="col-10">
+                                <?php if($prisoner->cell_id !== null) { ?>
+                                    <a href="/cells/<?= $prisoner->cell_id ?>"><?= $prisoner->Cell->code ?></a> - <a href="#" data-bs-toggle="modal" data-bs-target="#cell-finder" onclick="cellSearch()">Cel wijzigen</a>
+                                <?php } else { ?>
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#cell-finder" onclick="cellSearch()">Cel zoeken</a>
+                                <?php } ?>
+                            </div>
+                        </div>
+        
+                        <div class="d-flex mt-1">
+                            <button type="submit" class="ms-auto btn btn-primary">Opslaan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </div>
+        <div class="col-4 px-0 ps-1">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column" style="justify-content: space-around;">
+                    <div class="text-center">
+                        <h2><?= $prisoner->firstname ?> <?= $prisoner->lastname ?></h2>
+                    </div>
 
-            <form action="/prisoners/<?= $prisoner->id ?>" method="POST" id="prisoners-from" class="ajax-request reload-on-success">
-                <input type="hidden" name="_method" value="PUT" />
+                    <div class="d-flex justify-content-center align-items-center" style="height: 15em;">
+                        <img src="<?= $prisoner->profile_picture ?? '/static/assets/avatar-default.svg' ?>" style="border-radius: 9999px; height: 17em;">
+                    </div>
 
-                @csrf
-
-                <input type="hidden" name="cell_id" value="<?= $prisoner->cell_id ?>" />
-                <input type="hidden" name="note" value="" />
-
-                <div class="row mt-3">
-                    <div class="col-2 align-content-center">
-                        <label>Voornaam</label>
-                    </div>
-                    <div class="col-10">
-                        <input type="text" name="firstname" value="<?= $prisoner->firstname ?>" class="form-control">
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-2 align-content-center">
-                        <label>Achternaam</label>
-                    </div>
-                    <div class="col-10">
-                        <input type="text" name="lastname" value="<?= $prisoner->lastname ?>" class="form-control">
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-2 align-content-center">
-                        <label>Geboortedatum</label>
-                    </div>
-                    <div class="col-10">
-                        <input type="date" name="birthdate" value="<?= $prisoner->birthdate ?>" class="form-control">
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-2 align-content-center">
-                        <label>Datum van aankomst</label>
-                    </div>
-                    <div class="col-10">
-                        <input type="date" name="date_of_arrival" value="<?= $prisoner->date_of_arrival ?>" class="form-control">
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-2 align-content-center">
-                        <label>Datum van vertrek</label>
-                    </div>
-                    <div class="col-10">
-                        <input type="date" name="date_of_leaving" value="<?= $prisoner->date_of_leaving ?>" class="form-control">
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-2 align-content-center">Cel</div>
-                    <div class="col-10">
-                        <?php if($prisoner->cell_id !== null) { ?>
-                            <a href="/cells/<?= $prisoner->cell_id ?>"><?= $prisoner->Cell->code ?></a> - <a href="#" data-bs-toggle="modal" data-bs-target="#cell-finder" onclick="cellSearch()">Cel wijzigen</a>
+                    <div> 
+                        <?php if($prisoner->profile_picture == null) {?>
+                            <form action="/prisoners/<?= $prisoner->id ?>" method="POST" class="d-flex justify-content-center ajax-request reload-on-success" enctype="multipart/form-data"> 
+                                @csrf
+                                <input type="hidden" name="_method" value="PUT" />
+                                <input type="file" name="profile_picture" autocomplete="off">
+                                <button class="btn btn-primary" type="submit">Opslaan</button>
+                            </form>
                         <?php } else { ?>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#cell-finder" onclick="cellSearch()">Cel zoeken</a>
+                            <form action="/prisoners/<?= $prisoner->id ?>" method="POST" class="d-flex justify-content-center ajax-request reload-on-success" enctype="multipart/form-data"> 
+                                @csrf
+                                <input type="hidden" name="_method" value="PUT" />
+                                <input type="hidden" name="profile_picture" value="DELETE">
+                                <button class="btn btn-danger" type="submit">Verwijderen</button>
+                            </form>
                         <?php } ?>
                     </div>
                 </div>
-
-                <div class="d-flex mt-1">
-                    <button type="submit" class="ms-auto btn btn-primary">Opslaan</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 

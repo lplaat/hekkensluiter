@@ -16,6 +16,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('/prisoners', controller: PrisonerController::class);
+Route::get('storage/{path}', function($path) {
+    $fullPath = storage_path('app/public/' . $path);
+    dd($fullPath);
+    if (file_exists($fullPath)) {
+        return response()->file($fullPath);
+    }
+    return abort(404);
+})->where('path', '.*');
+
 Route::resource('/cells', controller: CellController::class);
 Route::resource('/cellHistories', controller: CellHistoryController::class);
 
@@ -27,20 +36,40 @@ Route::middleware('auth')->group(callback: function () {
 });
 
 // Static routes
-Route::get('/static/js/{path}', function ($path) {
-    $fullPath = resource_path('js/' . $path);
-    if (!file_exists($fullPath)) {
-        abort(404);
-    }
-    return response()->file($fullPath, ['Content-Type' => 'application/javascript']);
-})->where('path', '.*');
+Route::get('/static/{type}/{path}', function ($type, $path) {
+    // Map file extensions to correct MIME types
+    $mimeTypes = [
+        'js'  => 'application/javascript',
+        'css' => 'text/css',
+        'svg' => 'image/svg+xml'
+    ];
 
-Route::get('/static/css/{path}', function ($path) {
-    $fullPath = resource_path('css/' . $path);
-    if (!file_exists($fullPath)) {
+    // Check if it's accessing the /static/assets directory
+    if ($type === 'assets') {
+        // Generate the full file path for the requested asset
+        $filePath = resource_path("assets/$path");
+    } else {
+        // Handle /static/js/{path} and /static/css/{path}
+        $validTypes = ['js', 'css'];
+        if (!in_array($type, $validTypes)) {
+            abort(404);
+        }
+        $filePath = resource_path("$type/$path");
+    }
+
+    // Check if the requested file exists
+    if (!file_exists($filePath)) {
         abort(404);
     }
-    return response()->file($fullPath, ['Content-Type' => 'text/css']);
-})->where('path', '.*');
+
+    // Get the file extension dynamically to set the correct MIME type
+    $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+
+    // Determine MIME type, default to application/octet-stream if not found
+    $contentType = $mimeTypes[$extension] ?? 'application/octet-stream';
+
+    // Return the file with the correct MIME type
+    return response()->file($filePath, ['Content-Type' => $contentType]);
+})->where(['type' => 'js|css|assets', 'path' => '.*']);
 
 require __DIR__.'/auth.php';

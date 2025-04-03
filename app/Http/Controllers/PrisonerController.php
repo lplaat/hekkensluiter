@@ -9,6 +9,7 @@ use App\Models\Cell;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class PrisonerController extends Controller
 {
@@ -37,22 +38,17 @@ class PrisonerController extends Controller
     // Store a new prisoner
     public function store(Request $request)
     {
-        $request->merge([
-            'cell_id' => empty($request->cell_id) ? null : $request->cell_id
-        ]);
-
         $validatedData = $request->validate([
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'birthdate' => 'required|date',
-            'profile_picture' => 'nullable|string',
-            'date_of_arrival' => 'required|date',
-            'date_of_leaving' => 'nullable|date',
-            'cell_id' => 'nullable|integer',
         ]);
 
         $prisoner = Prisoner::create($validatedData);
-        return response()->json($prisoner, 201);
+        return response()->json([
+            'success' => true,
+            'redirect' => route('prisoners.show', [$prisoner->id])
+        ]);
     }
 
     public function show($id, Request $request)
@@ -65,14 +61,52 @@ class PrisonerController extends Controller
         return response()->json($prisoner);
     }
 
+
+    public function create(Request $request)
+    {
+        if (!$request->ajax()) {
+            return view("prisoners.create");
+        }
+
+        return response()->json([]);
+    }
+
     public function update(Request $request, $id)
     {
         $prisoner = Prisoner::findOrFail($id);
+        
+        if($request->hasFile('profile_picture')) {
+            $file = $request->file('profile_picture');
+            
+            $filename = 'prisoner_' . $prisoner->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+            
+            $path = $file->storeAs('prisoners', $filename, 'public');
+            
+            $url = Storage::url($path);
+            
+            $prisoner->profile_picture = '/public' . $url;
+            $prisoner->save();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Saved profile picture'
+            ]);
+        }
+
+        if($request['profile_picture'] == 'DELETE') {
+            $prisoner->profile_picture = null;
+            $prisoner->save();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Saved profile picture'
+            ]);
+        }
 
         if(!empty($request['cell_id'])) {
             $newCell = Cell::findOrFail($request['cell_id']);
         }
-
+        
         if($prisoner->cell_id !== null && empty($request['cell_id'])) {
             $log = new CellHistory();
             $log->type = 'unassigned';
@@ -84,7 +118,7 @@ class PrisonerController extends Controller
             $log->type = 'transferred';
             $log->old_cell_id = $prisoner->cell_id;
         }
-
+        
         if(isset($log)) {
             $log->prisoner_id = $prisoner->id;
             $log->user_id = Auth::id();
@@ -92,7 +126,7 @@ class PrisonerController extends Controller
             $log->note = $request['note'];
             $log->save();
         }
-
+        
         $prisoner->update($request->all());
         return response()->json($prisoner);
     }

@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->string('lastname');
             $table->date('birthdate');
             $table->string('profile_picture')->nullable();
-            $table->date('date_of_arrival');
+            $table->date('date_of_arrival')->nullable();
             $table->date('date_of_leaving')->nullable();
             $table->foreignId('cell_id')->nullable();
             $table->timestamps();

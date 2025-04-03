@@ -44,26 +44,54 @@ function createDataTable(tableId, columns, endpoint, action, data={}) {
 document.addEventListener('DOMContentLoaded', () => {
     $('.ajax-request').on('submit', (event) => {
         event.preventDefault();
-
         const form = $(event.target);
-        $.ajax({
+        
+        // Check if the form has file inputs
+        const hasFileInputs = form.find('input[type="file"]').length > 0;
+        
+        // Prepare data based on whether files are present
+        let formData;
+        if (hasFileInputs) {
+            // Use FormData to handle files
+            formData = new FormData(form[0]);
+        } else {
+            // Use serialize for non-file forms
+            formData = form.serialize();
+        }
+        
+        // Configure AJAX options
+        const ajaxOptions = {
             url: form.attr('action'),
             dataType: 'json',
             method: 'POST',
-            data: form.serialize(),
-
+            data: formData,
             success: async function (data) {
                 new Notify({
                     status: 'success',
                     text: "Gegevens opgeslagen!",
                 });
 
-                if(form.hasClass('reload-on-success')) {
+                if (form.hasClass('reload-on-success')) {
                     setTimeout(() => {
                         location.reload();
                     }, 1000);
                 }
+
+                if(data.redirect !== undefined) {
+                    setTimeout(() => {
+                        location.href = data.redirect;
+                    }, 1000);
+                }
             }
-        });
+        };
+        
+        // Add necessary options for FormData/file uploads
+        if (hasFileInputs) {
+            ajaxOptions.processData = false;
+            ajaxOptions.contentType = false;
+        }
+        
+        // Send the request
+        $.ajax(ajaxOptions);
     });
 });
