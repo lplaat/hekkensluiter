@@ -60,6 +60,10 @@
     background-color: white;
 }
 
+.dataTables_wrapper table.dataTable {
+    min-width: 100%;
+}
+
 .dataTables_wrapper table.dataTable tbody tr {
     transition: background-color 0.3s ease;
 }

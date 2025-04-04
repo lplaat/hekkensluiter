@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrisonerController;
 use App\Http\Controllers\CellController;
 use App\Http\Controllers\CellHistoryController;
+use App\Http\Controllers\IncidentController;
 
 // Default routes
 Route::get('/', function () {
@@ -15,18 +16,21 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('/prisoners', controller: PrisonerController::class);
-Route::get('storage/{path}', function($path) {
-    $fullPath = storage_path('app/public/' . $path);
-    dd($fullPath);
-    if (file_exists($fullPath)) {
-        return response()->file($fullPath);
-    }
-    return abort(404);
-})->where('path', '.*');
-
-Route::resource('/cells', controller: CellController::class);
-Route::resource('/cellHistories', controller: CellHistoryController::class);
+Route::middleware('auth')->group(callback: function () {
+    Route::resource('/prisoners', controller: PrisonerController::class);
+    Route::get('storage/{path}', function($path) {
+        $fullPath = storage_path('app/public/' . $path);
+        dd($fullPath);
+        if (file_exists($fullPath)) {
+            return response()->file($fullPath);
+        }
+        return abort(404);
+    })->where('path', '.*');
+    
+    Route::resource('/cells', controller: CellController::class);
+    Route::resource('/cellHistories', controller: CellHistoryController::class);
+    Route::resource('/incidents', controller: IncidentController::class);
+});
 
 // Profile Routes
 Route::middleware('auth')->group(callback: function () {

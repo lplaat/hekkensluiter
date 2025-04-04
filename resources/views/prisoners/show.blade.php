@@ -142,6 +142,22 @@
     </div>
 
     <div class="card m-2">
+        <div class="card-body position-relative">
+            <div class="position-absolute m-2 mt-3" style="top: 0; right: 0;">
+                <a class="btn btn-success" href="{{ route('incidents.create') }}?prisonerId=<?= $prisoner->id ?>"><i class="fas fa-plus"></i></a>
+            </div>
+
+            <h2>Delicten</h2>
+
+            <table id="incedents" class="table table-striped">
+                <thead>
+
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <div class="card m-2">
         <div class="card-body">
             <h2>Cel Geschiedenis</h2>
 
@@ -185,6 +201,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", function(event) {
+            createDataTable('incedents', ['gevangene', 'title', 'waneer', 'actie'], '/incidents?prisonerId=<?= $prisoner->id ?>');
             createDataTable('cellHistroy', ['actie', 'gebruiker', 'hoelaat', 'notitie'], '/cellHistories?prisonerId=<?= $prisoner->id ?>');
         });
     </script>
