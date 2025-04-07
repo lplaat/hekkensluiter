@@ -1,3 +1,6 @@
+<?php 
+use Illuminate\Support\Facades\Auth;
+?>
 <nav class="navbar navbar-expand-lg bg-light-subtle">
     <div class="container-fluid">
         <x-application-logo class="navbar-brand mb-0"/>
@@ -7,21 +10,32 @@
                     {{ __('Dashboard') }}
                 </x-nav-link>
             </li>
+            
             <li class="nav-item">
                 <x-nav-link :href="route('prisoners.index')" :active="request()->routeIs('prisoners')">
                     {{ __('Gevangenen') }}
                 </x-nav-link>
             </li>
+            
             <li class="nav-item">
                 <x-nav-link :href="route('cells.index')" :active="request()->routeIs('cells')">
                     {{ __('Cellen') }}
                 </x-nav-link>
             </li>
+
             <li class="nav-item">
                 <x-nav-link :href="route('incidents.index')" :active="request()->routeIs('incidents')">
                     {{ __('Delicten') }}
                 </x-nav-link>
             </li>
+
+            <?php if(Auth::user()->role == 2) { ?>
+                <li class="nav-item">
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users')">
+                        {{ __('Gebruikers') }}
+                    </x-nav-link>
+                </li>
+            <?php } ?>
         </ul>
         <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
@@ -31,10 +45,6 @@
                 </x-slot>
 
                 <x-slot name="content">
-                    <li><x-dropdown-link :href="route('profile.edit')">
-                        {{ __('Profiel') }}
-                    </x-dropdown-link></li>
-
                     <!-- Authentication -->
                     <li><form method="POST" action="{{ route('logout') }}">
                         @csrf

@@ -23,6 +23,11 @@ class CellHistoryController extends Controller
             $query->orWhere('old_cell_id', operator: $cellId);
         }
 
+        $userID = $request->input('userId', null);
+        if( $userID !== null) {
+            $query->where('user_id', operator: $userID);
+        }
+
         return DataTables::of($query)
             ->addColumn('actie', function ($log) {
                 if($log->type == 'assigned') {

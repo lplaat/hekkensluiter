@@ -5,7 +5,7 @@
                 <h2>Cel - <?= $cell->code ?></h2>
             </div>
 
-            <form action="/cells/<?= $cell->id ?>" method="POST" class="ajax-request">
+            <form action="/cells/<?= $cell->id ?>" method="POST" class="ajax-request <?= Auth::user()->role == 0 ? 'readonly-fields' : '' ?>">
                 <input type="hidden" name="_method" value="PUT" />
                 @csrf
 
@@ -38,9 +38,11 @@
                     </div>
                 <?php } ?>
 
-                <div class="d-flex mt-1">
-                    <button type="submit" class="ms-auto btn btn-primary">Opslaan</button>
-                </div>
+                <?php if(Auth::user()->role !== 0) { ?>
+                    <div class="d-flex mt-1">
+                        <button type="submit" class="ms-auto btn btn-primary">Opslaan</button>
+                    </div>
+                <?php } ?>
             </form>
         </div>
     </div>

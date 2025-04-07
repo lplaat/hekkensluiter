@@ -5,9 +5,11 @@
                 <h2>Delicten</h2>
             </div>
 
-            <div class="position-absolute m-2 mt-3" style="top: 0; right: 0;">
-                <a class="btn btn-success" href="{{ route('prisoners.create') }}"><i class="fas fa-plus"></i></a>
-            </div>
+            <?php if(Auth::user()->role !== 0) {?>
+                <div class="position-absolute m-2 mt-3" style="top: 0; right: 0;">
+                    <a class="btn btn-success" href="{{ route('prisoners.create') }}"><i class="fas fa-plus"></i></a>
+                </div>
+            <?php } ?>
 
             <table id="incedents" class="table table-striped">
                 <thead>

@@ -21,6 +21,11 @@ class IncidentController extends Controller
         if( $prisonerId !== null) {
             $query->where('prisoner_id', $prisonerId);
         }
+
+        $userID = $request->input('userId', null);
+        if( $userID !== null) {
+            $query->where('user_id', operator: $userID);
+        }
     
         return DataTables::of($query)
             ->addColumn('gevangene', function ($log) {

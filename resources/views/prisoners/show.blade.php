@@ -37,7 +37,7 @@
                         <h2>Gevangene - <?= $prisoner->firstname ?> <?= $prisoner->lastname ?></h2>
                     </div>
         
-                    <form action="/prisoners/<?= $prisoner->id ?>" method="POST" id="prisoners-from" class="ajax-request reload-on-success">
+                    <form action="/prisoners/<?= $prisoner->id ?>" method="POST" id="prisoners-from" class="ajax-request reload-on-success <?= Auth::user()->role == 0 ? 'readonly-fields' : '' ?>">
                         <input type="hidden" name="_method" value="PUT" />
         
                         @csrf
@@ -94,16 +94,23 @@
                             <div class="col-2 align-content-center">Cel</div>
                             <div class="col-10">
                                 <?php if($prisoner->cell_id !== null) { ?>
-                                    <a href="/cells/<?= $prisoner->cell_id ?>"><?= $prisoner->Cell->code ?></a> - <a href="#" data-bs-toggle="modal" data-bs-target="#cell-finder" onclick="cellSearch()">Cel wijzigen</a>
-                                <?php } else { ?>
+                                    <a href="/cells/<?= $prisoner->cell_id ?>"><?= $prisoner->Cell->code ?></a> 
+                                    <?php if(Auth::user()->role !== 0) { ?>                                        
+                                        - <a href="#" data-bs-toggle="modal" data-bs-target="#cell-finder" onclick="cellSearch()">Cel wijzigen</a>
+                                    <?php } ?>
+                                <?php } else if(Auth::user()->role !== 0) { ?>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#cell-finder" onclick="cellSearch()">Cel zoeken</a>
+                                <?php } else { ?>
+                                    <span>Geen cel aangewezen</span>
                                 <?php } ?>
                             </div>
                         </div>
         
-                        <div class="d-flex mt-1">
-                            <button type="submit" class="ms-auto btn btn-primary">Opslaan</button>
-                        </div>
+                        <?php if(Auth::user()->role !== 0) { ?>
+                            <div class="d-flex mt-1">
+                                <button type="submit" class="ms-auto btn btn-primary">Opslaan</button>
+                            </div>
+                        <?php } ?>
                     </form>
                 </div>
             </div>
@@ -119,23 +126,25 @@
                         <img src="<?= $prisoner->profile_picture ?? '/static/assets/avatar-default.svg' ?>" style="border-radius: 9999px; height: 17em;">
                     </div>
 
-                    <div> 
-                        <?php if($prisoner->profile_picture == null) {?>
-                            <form action="/prisoners/<?= $prisoner->id ?>" method="POST" class="d-flex justify-content-center ajax-request reload-on-success" enctype="multipart/form-data"> 
-                                @csrf
-                                <input type="hidden" name="_method" value="PUT" />
-                                <input type="file" name="profile_picture" autocomplete="off">
-                                <button class="btn btn-primary" type="submit">Opslaan</button>
-                            </form>
-                        <?php } else { ?>
-                            <form action="/prisoners/<?= $prisoner->id ?>" method="POST" class="d-flex justify-content-center ajax-request reload-on-success" enctype="multipart/form-data"> 
-                                @csrf
-                                <input type="hidden" name="_method" value="PUT" />
-                                <input type="hidden" name="profile_picture" value="DELETE">
-                                <button class="btn btn-danger" type="submit">Verwijderen</button>
-                            </form>
-                        <?php } ?>
-                    </div>
+                    <?php if(Auth::user()->role !== 0) { ?>
+                        <div> 
+                            <?php if($prisoner->profile_picture == null) {?>
+                                <form action="/prisoners/<?= $prisoner->id ?>" method="POST" class="d-flex justify-content-center ajax-request reload-on-success" enctype="multipart/form-data"> 
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PUT" />
+                                    <input type="file" name="profile_picture" autocomplete="off">
+                                    <button class="btn btn-primary" type="submit">Opslaan</button>
+                                </form>
+                            <?php } else { ?>
+                                <form action="/prisoners/<?= $prisoner->id ?>" method="POST" class="d-flex justify-content-center ajax-request reload-on-success" enctype="multipart/form-data"> 
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PUT" />
+                                    <input type="hidden" name="profile_picture" value="DELETE">
+                                    <button class="btn btn-danger" type="submit">Verwijderen</button>
+                                </form>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
@@ -143,9 +152,11 @@
 
     <div class="card m-2">
         <div class="card-body position-relative">
-            <div class="position-absolute m-2 mt-3" style="top: 0; right: 0;">
-                <a class="btn btn-success" href="{{ route('incidents.create') }}?prisonerId=<?= $prisoner->id ?>"><i class="fas fa-plus"></i></a>
-            </div>
+            <?php if(Auth::user()->role !== 0) { ?>
+                <div class="position-absolute m-2 mt-3" style="top: 0; right: 0;">
+                    <a class="btn btn-success" href="{{ route('incidents.create') }}?prisonerId=<?= $prisoner->id ?>"><i class="fas fa-plus"></i></a>
+                </div>
+            <?php } ?>
 
             <h2>Delicten</h2>
 

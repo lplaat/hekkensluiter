@@ -5,7 +5,7 @@
                 <h2>Delict - <?= $incident->Prisoner->firstname . ' ' . $incident->Prisoner->lastname ?> - <?= $incident->title ?></h2>
             </div>
 
-            <form action="/incidents/<?= $incident->id ?>" method="POST" class="ajax-request reload-on-success">
+            <form action="/incidents/<?= $incident->id ?>" method="POST" class="ajax-request reload-on-success <?= Auth::user()->role == 0 ? 'readonly-fields' : '' ?>">
                 <input type="hidden" name="_method" value="PUT" />
                 @csrf
 
@@ -41,7 +41,11 @@
                         <label>Aangemaakt door</label>
                     </div>
                     <div class="col-10">
-                        <a href="/users/<?= $incident->user_id ?>"><?= $incident->User->name ?></a>
+                        <?php if(Auth::user()->role == 2) { ?>
+                            <a href="/users/<?= $incident->user_id ?>"><?= $incident->User->name ?></a>
+                        <?php } else { ?>
+                            <span><?= $incident->User->name ?></span>
+                        <?php } ?>
                     </div>
                 </div>
 
@@ -54,9 +58,11 @@
                     </div>
                 </div>
 
-                <div class="d-flex mt-1">
-                    <button type="submit" class="ms-auto btn btn-primary">Opslaan</button>
-                </div>
+                <?php if(Auth::user()->role !== 0) {?>
+                    <div class="d-flex mt-1">
+                        <button type="submit" class="ms-auto btn btn-primary">Opslaan</button>
+                    </div>
+                <?php } ?>
             </form>
         </div>
     </div>

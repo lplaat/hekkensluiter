@@ -6,18 +6,15 @@ use App\Http\Controllers\PrisonerController;
 use App\Http\Controllers\CellController;
 use App\Http\Controllers\CellHistoryController;
 use App\Http\Controllers\IncidentController;
+use App\Http\Controllers\UsersController;
 
 // Default routes
-Route::get('/', function () {
-    return redirect(route('login'));
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(callback: function () {
-    Route::resource('/prisoners', controller: PrisonerController::class);
+    Route::resource('/prisoners', controller: PrisonerController::class)->middleware('readonly');
     Route::get('storage/{path}', function($path) {
         $fullPath = storage_path('app/public/' . $path);
         dd($fullPath);
@@ -27,16 +24,11 @@ Route::middleware('auth')->group(callback: function () {
         return abort(404);
     })->where('path', '.*');
     
-    Route::resource('/cells', controller: CellController::class);
-    Route::resource('/cellHistories', controller: CellHistoryController::class);
-    Route::resource('/incidents', controller: IncidentController::class);
-});
+    Route::resource('/cells', controller: CellController::class)->middleware('readonly');
+    Route::resource('/cellHistories', controller: CellHistoryController::class)->middleware('readonly');
+    Route::resource('/incidents', controller: IncidentController::class)->middleware('readonly');
 
-// Profile Routes
-Route::middleware('auth')->group(callback: function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');    
+    Route::resource(name: '/users', controller: UsersController::class)->middleware('role:2');
 });
 
 // Static routes
