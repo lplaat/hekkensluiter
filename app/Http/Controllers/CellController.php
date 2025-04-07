@@ -40,7 +40,7 @@ class CellController extends Controller
             })
             ->addColumn('action', function ($cell) use ($actionType) {
                 if ($actionType === 'viewCell') {
-                    return '<a href="' . route('cells.show', $cell->id) . '" class="btn btn-info btn-sm">Bekijken</a>';
+                    return '<a href="' . route('cells.show', $cell->id) . '" class="btn btn-info btn-sm">Bekijken of Bewerken</a>';
                 } elseif ($actionType === 'prisonerAssign') {
                     return '<a onclick="assignCell(' . $cell->id . ')" class="btn btn-success btn-sm">Toewijzen</a>';
                 }

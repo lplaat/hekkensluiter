@@ -26,7 +26,7 @@ class UsersController extends Controller
                 return $user->RoleText;
             })
             ->addColumn('actie', function ($user) {
-                return '<a href="' . route('users.show', $user->id) . '" class="btn btn-info btn-sm">Bekijken</a>';
+                return '<a href="' . route('users.show', $user->id) . '" class="btn btn-info btn-sm">Bekijken of Bewerken</a>';
             })
             ->rawColumns(['actie'])
             ->make(true);

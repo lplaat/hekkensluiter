@@ -38,7 +38,7 @@ class IncidentController extends Controller
                 return $log->created_at->format('Y-m-d H:i:s');
             })
             ->addColumn('actie', function ($log) {
-                return '<a href="' . route('incidents.show', $log->id) . '" class="btn btn-info btn-sm">Bekijken</a>';
+                return '<a href="' . route('incidents.show', $log->id) . '" class="btn btn-info btn-sm">Bekijken of Bewerken</a>';
             })
             ->rawColumns(['actie'])
             ->make(true);

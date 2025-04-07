@@ -2,7 +2,7 @@
 
 @php
 $classes = ($active ?? false)
-            ? 'nav-link'
+            ? 'nav-link active'
             : 'nav-link';
 @endphp
 

@@ -29,7 +29,7 @@ class PrisonerController extends Controller
                 return $prisoner->cell_id ? "{$prisoner->Cell->code}" : 'Geen cel toegewezen';
             })
             ->addColumn('action', function ($prisoner) {
-                return '<a href="'.route('prisoners.show', $prisoner->id).'" class="btn btn-info btn-sm">Bekijken</a>';
+                return '<a href="'.route('prisoners.show', $prisoner->id).'" class="btn btn-info btn-sm">Bekijken of Bewerken</a>';
             })
             ->rawColumns(['action'])
             ->make(true);

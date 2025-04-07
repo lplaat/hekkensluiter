@@ -1,47 +1,50 @@
-
 <x-app-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-    <div class="d-flex justify-content-center align-items-center vh-100">
-        <div class="text-center w-25 bg-light-subtle p-4 rounded">
+    
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h4 class="mt-4">Welkom bij het arrestantencomplex</h4>
+                <p class="text-muted">Log in met uw gegevens</p>
+            </div>
+            
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <x-application-logo />
+                
                 <!-- Email Address -->
-
-                <div class="text-start">
+                <div class="mb-3">
                     <x-input-label for="email" :value="__('E-mail:')" />
                     <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                 </div>
                 
-                <div class="mt-4 text-start">
+                <!-- Password -->
+                <div class="mb-3">
                     <x-input-label for="password" :value="__('Wachtwoord:')" />
-
                     <x-text-input id="password" class="block mt-1 w-full"
-                                    type="password"
-                                    name="password"
-                                    required autocomplete="current-password" />
-        
+                        type="password"
+                        name="password"
+                        required autocomplete="current-password" />
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
 
-                <div class="mt-4 text-start">
-                    <label for="remember_me" class="inline-flex items-center">
-                        <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                        <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Onthoud mij') }}</span>
-                    </label>
+                <!-- Remember Me -->
+                <div class="mb-3 form-check custom-checkbox">
+                    <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
+                    <label class="form-check-label" for="remember_me">{{ __('Onthoud mij') }}</label>
                 </div>
 
-                <div class="mt-3 text-end">
-                    <x-primary-button class="ms-2 btn btn-primary">
-                        {{ __('Inloggen') }}
+                <div class="d-grid gap-2">
+                    <x-primary-button class="btn-lg">
+                        <i class="fas fa-sign-in-alt me-2"></i> {{ __('Inloggen') }}
                     </x-primary-button>
+                </div>
+                
+                <div class="auth-footer">
+                    <p>Arrestantencomplex Hekkensluiter &copy; 2025</p>
                 </div>
             </form>
         </div>
-    </div>  
-
-   
-    
+    </div>
 </x-app-layout>

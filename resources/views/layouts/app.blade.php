@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-bs-theme="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         
         <!-- Custom Styles -->
-        <link href="/static/css/style.css" rel="stylesheet" />
+        <link href="{{ asset('css/navbar.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
         
         <!-- External Libraries -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
@@ -37,13 +38,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/0.5.14/hls.min.js" integrity="sha512-js37JxjD6gtmJ3N2Qzl9vQm4wcmTilFffk0nTSKzgr3p6aitg73LR205203wTzCCC/NZYO2TAxSa0Lr2VMLQvQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         
         <!-- Custom Scripts -->
-        <script src="/static/js/default.js"></script>        
+        <script src="{{ asset('static/js/default.js') }}"></script>        
     </head>
-    <body class="">
-        <div class="">
-            @if (Auth::check()) 
+    <body>
+        <div class="d-flex flex-column min-vh-100">
             @include('layouts.navbar')
-            @endif
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="">

@@ -1,0 +1,368 @@
+/* Main Theme CSS for Hekkensluiter */
+
+:root {
+    --primary: #8B4513;
+    --secondary: #A67C52;
+    --light-brown: #D2B48C;
+    --very-light-brown: #F5DEB3;
+    --dark-brown: #5D2906;
+    --text-brown: #3E2723;
+    --background-light: #f8f5f2;
+    --background-card: #ffffff;
+    --success: #2E7D32;
+    --warning: #FF8F00;
+    --danger: #C62828;
+    --info: #0277BD;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-brown);
+    background-color: var(--background-light);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Card Styling */
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card-title {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.card-header {
+    background-color: var(--secondary);
+    color: white;
+    font-weight: 600;
+    border-bottom: none;
+}
+
+.card-accent {
+    border-top: 4px solid var(--primary);
+}
+
+/* Table Styling */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(166, 124, 82, 0.05);
+}
+
+.table thead th {
+    background-color: var(--dark-brown);
+    color: white;
+    font-weight: 600;
+    border-top: none;
+}
+
+.table th, .table td {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+/* Button Styling */
+.btn {
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: var(--dark-brown);
+    border-color: var(--dark-brown);
+}
+
+.btn-success {
+    background-color: var(--success);
+    border-color: var(--success);
+}
+
+.btn-warning {
+    background-color: var(--warning);
+    border-color: var(--warning);
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    border-color: var(--danger);
+}
+
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Form Controls */
+.form-control, .form-select {
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 0.2rem rgba(166, 124, 82, 0.25);
+}
+
+.form-label {
+    color: var(--primary);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.form-text {
+    color: #777;
+}
+
+/* Authentication Pages */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 70px); /* Adjust based on navbar height */
+    padding: 2rem 0;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 450px;
+    background-color: var(--background-card);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+    border-top: 5px solid var(--primary);
+}
+
+.dataTables_wrapper {
+    position: relative;
+}
+
+.dataTable {
+    width: 100%;
+}
+
+.dataTables_wrapper .dataTables_filter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    z-index: 10;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.auth-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.auth-link:hover {
+    color: var(--dark-brown);
+    text-decoration: underline;
+}
+
+/* Badges */
+.badge {
+    font-weight: 500;
+    padding: 0.5em 0.75em;
+    border-radius: 4px;
+}
+
+.badge-primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.badge-secondary {
+    background-color: var(--secondary);
+    color: white;
+}
+
+/* Utility Classes */
+.bg-primary-light {
+    background-color: rgba(139, 69, 19, 0.08);
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.text-secondary {
+    color: var(--secondary) !important;
+}
+
+.border-primary {
+    border-color: var(--primary) !important;
+}
+
+/* Datatable Specific Styling */
+.dataTables_wrapper .dataTables_length, 
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 1.5rem;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 4px 8px;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 6px 10px;
+    margin-left: 0.5rem;
+}
+
+.dataTables_wrapper .dataTables_info {
+    padding-top: 1rem;
+    color: #777;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 0.4em 0.8em;
+    border-radius: 4px;
+    margin: 0 2px;
+    color: var(--text-brown) !important;
+    border: 1px solid #ddd;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, 
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    background: var(--primary);
+    color: white !important;
+    border: 1px solid var(--primary);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: var(--light-brown);
+    color: var(--dark-brown) !important;
+    border: 1px solid var(--light-brown);
+}
+
+/* Custom Checkbox */
+.custom-checkbox .form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.custom-checkbox .form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(139, 69, 19, 0.25);
+    border-color: var(--primary);
+}
+
+/* Custom Radio */
+.custom-radio .form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.custom-radio .form-check-input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(139, 69, 19, 0.25);
+    border-color: var(--primary);
+}
+
+/* Alerts */
+.alert {
+    border: none;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.alert-primary {
+    background-color: rgba(139, 69, 19, 0.1);
+    color: var(--dark-brown);
+}
+
+.alert-success {
+    background-color: rgba(46, 125, 50, 0.1);
+    color: var(--success);
+}
+
+.alert-warning {
+    background-color: rgba(255, 143, 0, 0.1);
+    color: var(--warning);
+}
+
+.alert-danger {
+    background-color: rgba(198, 40, 40, 0.1);
+    color: var(--danger);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--light-brown);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
