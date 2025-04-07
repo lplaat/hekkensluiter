@@ -44,6 +44,13 @@ class PrisonerController extends Controller
             'birthdate' => 'required|date',
         ]);
 
+        if(Prisoner::where('firstname', $validatedData['firstname'])->where('lastname', $validatedData['lastname'])->where('birthdate', $validatedData['birthdate'])->count() !== 0) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Prisoner bestaat al!'
+            ]);
+        }
+
         $prisoner = Prisoner::create($validatedData);
         return response()->json([
             'success' => true,

@@ -68,6 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             data: formData,
             success: async function (data) {
+                if(data.success === false) {
+                    new Notify({
+                        status: 'error',
+                        text: data.message,
+                    });
+                    return;
+                }
+
                 new Notify({
                     status: 'success',
                     text: "Gegevens opgeslagen!",
