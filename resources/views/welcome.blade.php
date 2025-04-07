@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 hero-content">
-                    <h1 class="mb-4">Arrestantencomplex Houten</h1>
+                    <h1 class="mb-4 text-white">Arrestantencomplex Houten</h1>
                     <p class="lead mb-4">Een innovatief politiecomplex ontworpen voor hoge functionaliteit, veiligheid en duurzaamheid in een architectonisch hoogwaardig gebouw.</p>
                     <a href="#features" class="btn btn-light btn-lg px-4 mt-3">
                         <i class="fas fa-eye me-2"></i>Ontdek meer
@@ -279,17 +279,14 @@
                     <address class="mb-0">
                         <p><i class="fas fa-map-marker-alt me-2"></i> Arrestantencomplex Houten</p>
                         <p><i class="fas fa-phone me-2"></i> 030-XXX XXXX</p>
-                        <p><i class="fas fa-envelope me-2"></i> info@politie.nl</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@example.com</p>
                     </address>
                 </div>
             </div>
             <hr style="border-color: var(--secondary); opacity: 0.3; margin: 30px 0;">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="mb-0">© 2025 Politie Nederland. Alle rechten voorbehouden.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="mb-0">Een realisatie van <a href="#" class="text-white">Politie Nederland</a></p>
+                    <p class="mb-0">© 2025 HekkenSluiter</p>
                 </div>
             </div>
         </div>

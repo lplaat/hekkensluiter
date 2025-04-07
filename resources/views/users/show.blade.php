@@ -61,6 +61,18 @@
 
     <div class="card m-2">
         <div class="card-body">
+            <h2>Logs aangemaakt</h2>
+
+            <table id="prisoner_logs" class="table table-striped">
+                <thead>
+
+                </thead>
+            </table>
+        </div>
+    </div>
+    
+    <div class="card m-2">
+        <div class="card-body">
             <h2>Celwijzigingen aangemaakt</h2>
 
             <table id="cellHistroy" class="table table-striped">
@@ -74,6 +86,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
             createDataTable('incedents', ['gevangene', 'title', 'waneer', 'actie'], '/incidents?userId=<?= $user->id ?>');
+            createDataTable('prisoner_logs', ['gevangene', 'title', 'waneer', 'actie'], '/prisonerLogs?userId=<?= $user->id ?>');
             createDataTable('cellHistroy', ['actie', 'gebruiker', 'hoelaat', 'notitie'], '/cellHistories?userId=<?= $user->id ?>');
         });
     </script>

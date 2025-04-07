@@ -6,6 +6,7 @@ use App\Http\Controllers\PrisonerController;
 use App\Http\Controllers\CellController;
 use App\Http\Controllers\CellHistoryController;
 use App\Http\Controllers\IncidentController;
+use App\Http\Controllers\PrisonerLogController;
 use App\Http\Controllers\UsersController;
 
 // Default routes
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(callback: function () {
     Route::resource('/cells', controller: CellController::class)->middleware('readonly');
     Route::resource('/cellHistories', controller: CellHistoryController::class)->middleware('readonly');
     Route::resource('/incidents', controller: IncidentController::class)->middleware('readonly');
+    Route::resource('/prisonerLogs', controller: PrisonerLogController::class);
 
     Route::resource(name: '/users', controller: UsersController::class)->middleware('role:2');
 });

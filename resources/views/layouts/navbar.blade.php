@@ -32,6 +32,12 @@
                         </x-nav-link>
                     </li>
 
+                    <li class="nav-item">
+                        <x-nav-link :href="route('prisonerLogs.index')" :active="request()->routeIs('prisonerLogs')">
+                            <i class="fas fa-clipboard-list me-1"></i> {{ __('Logs') }}
+                        </x-nav-link>
+                    </li>
+
                     <?php if(Auth::user()->role == 2) { ?>
                         <li class="nav-item">
                             <x-nav-link :href="route('users.index')" :active="request()->routeIs('users')">
