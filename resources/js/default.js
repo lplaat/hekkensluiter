@@ -42,7 +42,7 @@ function createDataTable(tableId, columns, endpoint, action, data={}) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    $('.readonly-fields input').prop('readonly', true);
+    $('.readonly-fields input, .readonly-fields textarea').prop('readonly', true);
 
     $('.ajax-request').on('submit', (event) => {
         event.preventDefault();
