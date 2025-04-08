@@ -42,6 +42,7 @@ Route::get('/static/{type}/{path}', function ($type, $path) {
     // Map file extensions to correct MIME types
     $mimeTypes = [
         'js'  => 'application/javascript',
+        'jpg'  => 'image/jpeg',
         'css' => 'text/css',
         'svg' => 'image/svg+xml'
     ];

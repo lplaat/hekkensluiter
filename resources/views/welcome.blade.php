@@ -14,8 +14,8 @@
                     </a>
                 </div>
                 <div class="col-lg-6">
-                    <div class="image-placeholder rounded-custom custom-shadow">
-                        <p><i class="fas fa-building fa-3x mb-3"></i><br>[Hier komt een afbeelding van de buitenkant van het Arrestantencomplex]</p>
+                    <div class="rounded-custom custom-shadow overflow-hidden">
+                        <img src="{{ asset('static/assets/building-picture.jpg') }}" alt="Buitenkant Arrestantencomplex" class="img-fluid w-100" style="object-fit: cover; height: 300px;">
                     </div>
                 </div>
             </div>
@@ -39,8 +39,8 @@
                 <p>De routing en functionele layout van alle faciliteiten is ontworpen en gebouwd om het proces van de gebruiker heen. Hierin is verzorgen en verhoren als duidelijke scheiding in de routing opgenomen, wat de efficiëntie en veiligheid van het complex verhoogt.</p>
             </div>
             <div class="col-lg-4">
-                <div class="image-placeholder rounded-custom custom-shadow">
-                    <p><i class="fas fa-crop-alt fa-3x mb-3"></i><br>[Hier komt een afbeelding van een architectonisch detail]</p>
+                <div class="rounded-custom custom-shadow overflow-hidden">
+                    <img src="{{ asset('static/assets/window-picture.jpg') }}" alt="Architectonisch detail" class="img-fluid w-100" style="object-fit: cover; height: 250px;">
                 </div>
                 <div class="card mt-4 card-accent custom-shadow">
                     <div class="card-header">
@@ -64,11 +64,11 @@
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="image-placeholder mb-0 rounded-bottom-0">
-                            <p><i class="fas fa-door-closed fa-3x mb-3"></i><br>[Afbeelding van cellenvleugel]</p>
+                        <div class="mb-0 rounded-bottom-0 overflow-hidden">
+                            <img src="{{ asset('static/assets/cels-picture.jpg') }}" alt="Cellenvleugel" class="img-fluid w-100" style="object-fit: cover; height: 200px;">
                         </div>
                         <div class="card-body">
-                            <div class="text-center mb-4">
+                            <div class="text-center my-2">
                                 <i class="fas fa-building feature-icon"></i>
                             </div>
                             <h5 class="card-title text-center">Detentiefaciliteiten</h5>
@@ -82,11 +82,11 @@
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="image-placeholder mb-0 rounded-bottom-0">
-                            <p><i class="fas fa-comments fa-3x mb-3"></i><br>[Afbeelding van verhoorkamer]</p>
+                        <div class="mb-0 rounded-bottom-0 overflow-hidden">
+                            <img src="{{ asset('static/assets/sketch-picture.jpg') }}" alt="Verhoorkamer" class="img-fluid w-100" style="object-fit: cover; height: 200px;">
                         </div>
                         <div class="card-body">
-                            <div class="text-center mb-4">
+                            <div class="text-center my-2">
                                 <i class="fas fa-comments feature-icon"></i>
                             </div>
                             <h5 class="card-title text-center">Verhoorfaciliteiten</h5>
@@ -100,11 +100,11 @@
                 </div>
                 <div class="col-md-4">
                     <div class="feature-card">
-                        <div class="image-placeholder mb-0 rounded-bottom-0">
-                            <p><i class="fas fa-laptop fa-3x mb-3"></i><br>[Afbeelding van kantooromgeving]</p>
+                        <div class="mb-0 rounded-bottom-0 overflow-hidden">
+                            <img src="{{ asset('static/assets/lobby-picture.jpg') }}" alt="Kantooromgeving" class="img-fluid w-100" style="object-fit: cover; height: 200px;">
                         </div>
                         <div class="card-body">
-                            <div class="text-center mb-4">
+                            <div class="text-center my-2">
                                 <i class="fas fa-briefcase feature-icon"></i>
                             </div>
                             <h5 class="card-title text-center">Ondersteunende ruimten</h5>
@@ -131,8 +131,8 @@
             
             <div class="row mb-5 align-items-center">
                 <div class="col-lg-6">
-                    <div class="image-placeholder rounded-custom custom-shadow">
-                        <p><i class="fas fa-landmark fa-3x mb-3"></i><br>[Historische afbeelding van schout/veldwachter]</p>
+                    <div class="rounded-custom custom-shadow overflow-hidden">
+                        <img src="{{ asset('static/assets/outside-picture.jpg') }}" alt="Historische afbeelding" class="img-fluid w-100" style="object-fit: cover; height: 250px;">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -145,8 +145,8 @@
     
             <div class="row mb-5 align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="image-placeholder rounded-custom custom-shadow">
-                        <p><i class="fas fa-crown fa-3x mb-3"></i><br>[Afbeelding van politie onder Napoleon]</p>
+                    <div class="rounded-custom custom-shadow overflow-hidden">
+                        <img src="{{ asset('static/assets/new-hallway-picture.jpg') }}" alt="Politie onder Napoleon" class="img-fluid w-100" style="object-fit: cover; height: 250px;">
                     </div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
@@ -159,8 +159,8 @@
     
             <div class="row mb-5 align-items-center">
                 <div class="col-lg-6">
-                    <div class="image-placeholder rounded-custom custom-shadow">
-                        <p><i class="fas fa-hat-cowboy fa-3x mb-3"></i><br>[Afbeelding van 19e-eeuwse veldwachter met uitrusting]</p>
+                    <div class="rounded-custom custom-shadow overflow-hidden">
+                        <img src="{{ asset('static/assets/building-picture.jpg') }}" alt="19e-eeuwse veldwachter" class="img-fluid w-100" style="object-fit: cover; height: 250px;">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -173,8 +173,8 @@
     
             <div class="row mb-5 align-items-center">
                 <div class="col-lg-6 order-lg-2">
-                    <div class="image-placeholder rounded-custom custom-shadow">
-                        <p><i class="fas fa-users-gear fa-3x mb-3"></i><br>[Afbeelding van politie tijdens WO II]</p>
+                    <div class="rounded-custom custom-shadow overflow-hidden">
+                        <img src="{{ asset('static/assets/sketch-picture.jpg') }}" alt="Politie tijdens WO II" class="img-fluid w-100" style="object-fit: cover; height: 250px;">
                     </div>
                 </div>
                 <div class="col-lg-6 order-lg-1">
@@ -187,8 +187,8 @@
     
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <div class="image-placeholder rounded-custom custom-shadow">
-                        <p><i class="fas fa-shield-halved fa-3x mb-3"></i><br>[Afbeelding van naoorlogse politie]</p>
+                    <div class="rounded-custom custom-shadow overflow-hidden">
+                        <img src="{{ asset('static/assets/lobby-picture.jpg') }}" alt="Naoorlogse politie" class="img-fluid w-100" style="object-fit: cover; height: 250px;">
                     </div>
                 </div>
                 <div class="col-lg-6">
